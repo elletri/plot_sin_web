@@ -1,20 +1,20 @@
 # Use official Julia image
 FROM julia:1.11-bullseye
 
-# Set working directory
+# Set working directory inside container
 WORKDIR /app
 
-# Copy project files first for dependency installation
+# Copy dependency files first for caching
 COPY Project.toml Manifest.toml* ./
 
-# Install dependencies
-RUN julia -e 'using Pkg; Pkg.instantiate()'
+# Install Julia dependencies
+RUN julia -e 'using Pkg; Pkg.activate("."); Pkg.instantiate(); Pkg.precompile()'
 
-# Copy app source code and frontend
+# Copy the rest of the app
 COPY . .
 
 # Expose Render default port
 EXPOSE 10000
 
-# Run the app
+# Run app.jl with the project environment
 ENTRYPOINT ["julia", "--project=.", "app.jl"]
