@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+  <h2>Sine Function Plotter</h2>
+
+  <label>Amplitude (A):
+    <input type="range" id="amp" min="0" max="5" value="1" step="0.1" oninput="updatePlot()">
+  </label>
+  <span id="amp_val">1</span><br><br>
+
+  <label>Frequency (f):
+    <input type="range" id="freq" min="1" max="20" value="5" step="1" oninput="updatePlot()">
+  </label>
+  <span id="freq_val">5</span><br><br>
+
+  <div id="plot"></div>
+
+  <script>
+  async function updatePlot() {
+    let A = document.getElementById("amp").value;
+    let f = document.getElementById("freq").value;
+    document.getElementById("amp_val").innerText = A;
+    document.getElementById("freq_val").innerText = f;
+
+    let response = await fetch(`/plot?A=${A}&f=${f}`);
+    let data = await response.json();
+
+    let trace = { x: data.x, y: data.y, mode: "lines", type: "scatter" };
+    let layout = { title: `${A} * sin(2π f x)`, xaxis: {title:"x"}, yaxis: {title:"y"} };
+    Plotly.newPlot("plot", [trace], layout);
+  }
+ </script>
+</body>
+</html>
