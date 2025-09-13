@@ -13,5 +13,7 @@ end
     return json(Dict("x" => x, "y" => y))
 end
 
-serve()
+# Render sets the port in ENV["PORT"]
+port = parse(Int, get(ENV, "PORT", "8080"))
+serve(host="0.0.0.0", port=port)
 
