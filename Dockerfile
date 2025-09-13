@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 10000
 
 # Run the app
-CMD ["julia", "app.jl"]
+ENTRYPOINT ["julia", "--project=.", "app.jl"]
