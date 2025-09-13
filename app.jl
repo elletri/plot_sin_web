@@ -14,6 +14,6 @@ end
 end
 
 # Render sets the port in ENV["PORT"]
-port = parse(Int, get(ENV, "PORT", "8080"))
+port = parse(Int, get(ENV, "PORT", "10000"))
 serve(host="0.0.0.0", port=port)
 

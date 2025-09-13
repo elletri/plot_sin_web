@@ -12,7 +12,7 @@ RUN julia -e 'using Pkg; Pkg.instantiate()'
 COPY . .
 
 # Expose Render’s port
-EXPOSE 8080
+EXPOSE 10000
 
 # Run your app
 CMD ["julia", "app.jl"]
