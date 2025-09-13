@@ -28,7 +28,7 @@ end
         return json(Dict("x" => x, "y" => y))
     catch e
         println("Error generating plot: ", e)
-        return json(Dict("error" => "failed to generate plot"))
+        return JSON.json(Dict("error" => "failed to generate plot"))
     end
 end
 
