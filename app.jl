@@ -13,7 +13,7 @@ Pkg.status()
         file("index.html")
     catch e
         println("Error serving index.html: ", e)
-        return json(Dict("error" => "index.html not found"))
+        return JSON.json(Dict("error" => "index.html not found"))
     end
 end
 
@@ -25,7 +25,7 @@ end
         f = parse(Float64, qp["f"])
         x = collect(range(0, 1, length=500))
         y = A .* sin.(2π .* f .* x)
-        return json(Dict("x" => x, "y" => y))
+        return JSON.json(Dict("x" => x, "y" => y))
     catch e
         println("Error generating plot: ", e)
         return JSON.json(Dict("error" => "failed to generate plot"))
